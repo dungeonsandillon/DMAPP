@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DMAPP</title>
+    <style>
+        :root {
+            --bg: #121111; --surface: #625a56; --card: #6a615c;
+            --text: #ecf9ff; --accent: #000b89; --accent2: #a5009a;
+        }
+        body { 
+            background: var(--bg); color: var(--text); 
+            font-family: sans-serif; padding: 20px; 
+        }
+        .tab-container {
+            display: flex; flex-wrap: wrap; gap: 10px; 
+            margin-bottom: 20px; background: var(--surface); 
+            padding: 15px; border-radius: 10px;
+        }
+        .tab-btn { 
+            background: var(--accent); color: var(--text); 
+            border: none; padding: 12px 20px; cursor: pointer;
+            border-radius: 8px; font-weight: bold;
+        }
+        .tab-btn.active { background: var(--accent2); }
+        .tab-content { 
+            background: var(--card); padding: 25px; 
+            border-radius: 10px; min-height: 60vh; 
+        }
+        .tab-pane { display: none; }
+        .tab-pane.active { display: block; }
+    </style>
+</head>
+<body>
+    <h1>🛡️ DMAPP</h1>
+    
+    <div class="tab-container">
+        <button class="tab-btn active" onclick="showTab('prepTab', this)">📝Prep</button>
+        <button class="tab-btn" onclick="showTab('worldTab', this)">🗺️World</button>
+        <button class="tab-btn" onclick="showTab('notesTab', this)">📔Notes</button>
+        <button class="tab-btn" onclick="showTab('generatorsTab', this)">⚔️Generator</button>
+        <button class="tab-btn" onclick="showTab('combatTab', this)">🗡️Tracker</button>
+        <button class="tab-btn" onclick="showTab('lootTab', this)">💰Loot</button>
+        <button class="tab-btn" onclick="showTab('shopsTab', this)">🏷️Shops</button>
+        <button class="tab-btn" onclick="showTab('downtimeTab', this)">⏱️Downtime</button>
+        <button class="tab-btn" onclick="showTab('tablesTab', this)">🎯Tables</button>
+        <button class="tab-btn" onclick="showTab('rulesTab', this)">📖Rules</button>
+        <button class="tab-btn" onclick="showTab('npcDirTab', this)">📋Directory</button>
+        <button class="tab-btn" onclick="showTab('businessTab', this)">🏪Businesses</button>
+        <button class="tab-btn" onclick="showTab('npcTab', this)">🎭NPC Generator</button>
+        <button class="tab-btn" onclick="showTab('reputationTab', this)">🏛️Factions</button>
+        <button class="tab-btn" onclick="showTab('wikiTab', this)">📚Wiki</button>
+    </div>
+
+<div id="prepTab" class="tab-content tab-pane active">
+    <div style="display: grid; gap: 20px; max-width: 800px;">
+        <div style="background: rgba(98,90,86,0.5); padding: 20px; border-radius: 10px;">
+            <h2 style="color: #43a8df;">📝 Party PCs</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+                <div><label>Name:</label><input type="text" id="pcName" placeholder="Thorgrim" style="width:100%; padding:10px; background:#625a56; color:#ecf9ff; border:1px solid #7a716d; border-radius:6px;"></div>
+                <div><label>AC:</label><input type="number" id="pcAC" value="16" min="10" max="25" style="width:100%; padding:10px; background:#625a56; color:#ecf9ff; border:1px solid #7a716d; border-radius:6px;"></div>
+                <div><label>HP:</label><input type="number" id="pcHP" value="27" min="1" max="300" style="width:100%; padding:10px; background:#625a56; color:#ecf9ff; border:1px solid #7a716d; border-radius:6px;"></div>
+                <div><label>Level:</label><input type="number" id="pcLevel" value="3" min="1" max="20" style="width:100%; padding:10px; background:#625a56; color:#ecf9ff; border:1px solid #7a716d; border-radius:6px;"></div>
+            </div>
+            <button onclick="addPC()" style="margin-top:15px; padding:12px 24px; background:#000b89; color:#ecf9ff; border:none; border-radius:8px; font-weight:bold; cursor:pointer;">Add PC</button>
+        </div>
+        
+        <div id="partyList" style="background: rgba(106,97,92,0.8); padding:20px; border-radius:10px;">
+            No PCs yet!
+        </div>
+    </div>
+</div>	
+	
+	
+<div id="worldTab" class="tab-content tab-pane">
+    <div style="display: grid; gap: 20px;">
+        <!-- Weather Panel -->
+        <div style="background: rgba(98,90,86,0.5); padding: 20px; border-radius: 10px;">
+            <h3 style="color: #43a8df; margin-bottom: 15px;">🌤️ Seasonal Weather</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                <div>
+                    <label>Month:</label>
+                    <select id="weatherMonth" style="width:100%; padding:10px; background:#625a56; color:#ecf9ff; border:1px solid #7a716d; border-radius:6px;">
+                        <option value="1">🌅 Dawnstar</option>
+                        <option value="2">🌸 Bloomtide</option>
+                        <option value="3">⭐ Starwake</option>
+                        <option value="4">☀️ Sunhigh</option>
+                        <option value="5">🔥 Embercrown</option>
+                        <option value="6">🌾 Harvestide</option>
+                        <option value="7">🍂 Leafall</option>
+                        <option value="8">🎃 Hallowtide</option>
+                        <option value="9">🌑 Shadowmoon</option>
+                        <option value="10">🧊 Icefall</option>
+                        <option value="11">🌙 Longnight</option>
+                        <option value="12">❄️ Frostveil</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Day:</label>
+                    <input id="weatherDay" type="number" value="15" min="1" max="30" style="width:100%; padding:10px; background:#625a56; color:#ecf9ff; border:1px solid #7a716d; border-radius:6px;">
+                </div>
+                <div style="align-self: end;">
+                    <button onclick="generateWeather()" style="width:100%; padding:12px; background:#000b89; color:#ecf9ff; border:none; border-radius:8px; font-weight:bold; cursor:pointer;">🎲 Roll Weather</button>
+                </div>
+            </div>
+            <div id="weatherResult" style="margin-top:15px; padding:20px; background:rgba(106,97,92,0.8); border-radius:10px; min-height:100px;">
+                Select month/day → Roll!
+            </div>
+        </div>
+        
+        <!-- Calendar Panel -->
+        <div style="background: rgba(98,90,86,0.5); padding: 20px; border-radius: 10px;">
+            <h3 style="color: #008f15; margin-bottom: 15px;">🌙 Fantasy Calendar</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom:15px;">
+                <div>
+                    <label>Month:</label>
+                    <select id="calendarMonth" style="width:100%; padding:10px; background:#625a56; color:#ecf9ff; border:1px solid #7a716d; border-radius:6px;">
+                        <option value="1">Frostmoon</option><option value="2">Bloomtide</option><option value="3">Sunhigh</option>
+                        <option value="4">Harvestide</option><option value="5">Leafall</option><option value="6" selected>Frostveil</option>
+                        <option value="7">Shadowmoon</option><option value="8">Starwake</option><option value="9">Hallowtide</option>
+                        <option value="10">Icefall</option><option value="11">Longnight</option><option value="12">Dawnstar</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Day:</label>
+                    <input id="calendarDay" type="number" value="15" min="1" max="30" style="width:100%; padding:10px; background:#625a56; color:#ecf9ff; border:1px solid #7a716d; border-radius:6px;">
+                </div>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom:15px;">
+                <button onclick="updateTime()" style="padding:12px; background:#008f15; color:#ecf9ff; border:none; border-radius:8px;">📅 Set</button>
+                <button onclick="advanceDay()" style="padding:12px; background:#ffb370; color:#000; border:none; border-radius:8px;">➡️ Next</button>
+                <button onclick="saveCalendarState()" style="padding:12px; background:#43a8df; color:#ecf9ff; border:none; border-radius:8px;">💾 Save</button>
+            </div>
+            <div id="calendarGrid" style="background:rgba(106,97,92,0.8); padding:15px; border-radius:10px; max-height:300px; overflow:auto; font-size:0.85em;">
+               
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <div id="notesTab" class="tab-content tab-pane">Notes tab ready!</div>
+    <div id="generatorsTab" class="tab-content tab-pane">Generators tab ready!</div>
+    <div id="combatTab" class="tab-content tab-pane">Combat tab ready!</div>
+    <div id="lootTab" class="tab-content tab-pane">Loot tab ready!</div>
+    <div id="shopsTab" class="tab-content tab-pane">Shops tab ready!</div>
+    <div id="downtimeTab" class="tab-content tab-pane">Downtime tab ready!</div>
+    <div id="tablesTab" class="tab-content tab-pane">Tables tab ready!</div>
+    <div id="rulesTab" class="tab-content tab-pane">Rules tab ready!</div>
+    <div id="npcDirTab" class="tab-content tab-pane">Directory tab ready!</div>
+    <div id="businessTab" class="tab-content tab-pane">Businesses tab ready!</div>
+    <div id="npcTab" class="tab-content tab-pane">NPC Generator tab ready!</div>
+    <div id="reputationTab" class="tab-content tab-pane">Factions tab ready!</div>
+    <div id="wikiTab" class="tab-content tab-pane">Wiki tab ready!</div>
+
+    <script>
+     let appData = {};
+// ===== CORE FUNCTIONS =====
+function showTab(tabId, clickedBtn) {
+    document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
+    clickedBtn.classList.add('active');
+}
+async function loadData() {
+    try {
+        const stored = localStorage.getItem('dmappData');
+        if (stored) appData = JSON.parse(stored);
+        else {
+            const res = await fetch('data.json');
+            appData = await res.json();
+            localStorage.setItem('dmappData', JSON.stringify(appData));
+        }
+        
+        // Load Prep
+        if (appData.party) {
+            party = appData.party;
+            showParty();
+        }
+        if (appData.prepNotes) document.getElementById('prepNotes').value = appData.prepNotes;
+        
+        // Load World Calendar
+        if (appData.currentDate) {
+            currentDate = appData.currentDate;
+            calendarNotes = appData.calendarNotes || {};
+            document.getElementById('calendarMonth').value = currentDate.month;
+            document.getElementById('calendarDay').value = currentDate.day;
+            displayCalendar();  // ← THIS LINE FIXES IT
+        }
+    } catch (e) { console.log('No data.json'); }
+}
+
+// ===== TAB: PREP =====
+let party = []; // Party list
+
+function addPC() {
+    const pc = {
+        name: document.getElementById('pcName').value || 'PC',
+        ac: parseInt(document.getElementById('pcAC').value) || 10,
+        hp: parseInt(document.getElementById('pcHP').value) || 1,
+        level: parseInt(document.getElementById('pcLevel').value) || 1
+    };
+    party.push(pc);
+    appData.party = party;
+    localStorage.setItem('dmappData', JSON.stringify(appData));
+    showParty();
+    // Clear form
+    document.getElementById('pcName').value = '';
+}
+
+function showParty() {
+    if (party.length === 0) {
+        document.getElementById('partyList').innerHTML = 'No PCs yet!';
+        return;
+    }
+    document.getElementById('partyList').innerHTML = `
+        <h3 style="color:#008f15;">Party (${party.length} PCs)</h3>
+        ${party.map((pc, i) => `
+            <div style="display:flex; justify-content:space-between; padding:10px; background:rgba(0,11,137,0.2); margin:5px 0; border-radius:6px;">
+                <span>${pc.name} (Lvl ${pc.level})</span>
+                <span>AC ${pc.ac} | HP ${pc.hp}</span>
+                <button onclick="removePC(${i})" style="padding:4px 8px; background:#9a251f; color:#ecf9ff; border:none; border-radius:4px; cursor:pointer;">Remove</button>
+            </div>
+        `).join('')}
+        <p><em>Total XP Budget (Medium): ~${Math.round(party.reduce((sum, pc) => sum + (75 * pc.level), 0))} XP</em></p>
+    `;
+}
+
+function removePC(index) {
+    party.splice(index, 1);
+    appData.party = party;
+    localStorage.setItem('dmappData', JSON.stringify(appData));
+    showParty();
+}
+// ===== TAB: WORLD =====
+function generateWeather() {
+    if (!appData.seasonalWeather) {
+        document.getElementById('weatherResult').innerHTML = `
+            <div style="padding:15px; text-align:center; color:#ffb370;">
+                data.json loading... (check console)
+            </div>
+        `;
+        return;
+    }
+    
+    const month = parseInt(document.getElementById('weatherMonth').value);
+    const day = parseInt(document.getElementById('weatherDay').value);
+    const weatherData = appData.seasonalWeather[month];
+    
+    if (!weatherData || weatherData.length === 0) {
+        document.getElementById('weatherResult').innerHTML = `
+            <div style="padding:15px; text-align:center;">
+                No weather for month ${month} yet
+            </div>
+        `;
+        return;
+    }
+    
+    const roll = Math.floor(Math.random() * weatherData.length);
+    const today = weatherData[roll];
+    
+    document.getElementById('weatherResult').innerHTML = `
+        <div style="padding:20px; background:rgba(0,11,137,0.3); border-radius:10px; text-align:center;">
+            <h4 style="color:#43a8df;">${getMonthName(month)} Day ${day}</h4>
+            <div style="font-size:1.4em; margin:10px 0;">${today.emoji || '🌤️'} ${today.weather || today.desc || 'Clear'}</div>
+            <p style="color:#b8c2cc;">${today.desc || today.effects || 'Normal travel'} (Roll ${roll+1}/${weatherData.length})</p>
+        </div>
+    `;
+}
+
+function getMonthName(num) {
+    const names = ['Dawnstar','Bloomtide','Starwake','Sunhigh','Embercrown','Harvestide','Leafall','Hallowtide','Shadowmoon','Icefall','Longnight','Frostveil'];
+    return names[num-1] || `Month ${num}`;
+}
+
+// ===== CALENDAR SYSTEM =====
+let currentDate = { month: 6, day: 15 }; // Frostveil 15 default
+let calendarNotes = {}; // { "6-15": "Party meets dragon" }
+
+function updateTime() {
+    currentDate.month = parseInt(document.getElementById('calendarMonth').value);
+    currentDate.day = parseInt(document.getElementById('calendarDay').value);
+    displayCalendar();
+}
+
+function advanceDay() {
+    currentDate.day++;
+    if (currentDate.day > 30) {
+        currentDate.day = 1;
+        currentDate.month = (currentDate.month % 12) + 1;
+    }
+    document.getElementById('calendarDay').value = currentDate.day;
+    document.getElementById('calendarMonth').value = currentDate.month;
+    displayCalendar();
+}
+
+function displayCalendar() {
+    const dateKey = `${currentDate.month}-${currentDate.day}`;
+    const note = calendarNotes[dateKey] || '';
+    
+    document.getElementById('currentDate').textContent = `${getMonthName(currentDate.month)} ${currentDate.day}`;
+    document.getElementById('calendarGrid').innerHTML = `
+        <div style="display:grid; grid-template-columns:repeat(7,1fr); gap:5px; max-height:300px; overflow:auto;">
+            ${Array(30).fill().map((_, day) => {
+                const dayKey = `${currentDate.month}-${day+1}`;
+                const isToday = day+1 === currentDate.day;
+                return `<div style="padding:8px; text-align:center; background:${isToday ? '#008f15' : 'transparent'}; border-radius:4px; font-size:.8em;">
+                    ${day+1}<br>
+                    <input placeholder="Note" value="${calendarNotes[dayKey]||''}" onchange="saveNote('${currentDate.month}',${day+1},this.value)" style="width:100%; margin-top:2px; padding:2px; background:rgba(98,90,86,0.7); color:#ecf9ff; border:1px solid #7a716d; border-radius:3px; font-size:.7em;">
+                </div>`;
+            }).join('')}
+        </div>
+        <textarea placeholder="Today's notes" style="width:100%; height:80px; margin-top:10px;" onchange="saveNote('${currentDate.month}',${currentDate.day},this.value)">${note}</textarea>
+    `;
+}
+
+function saveNote(month, day, text) {
+    const key = `${month}-${day}`;
+    calendarNotes[key] = text;
+    appData.calendarNotes = calendarNotes;
+    localStorage.setItem('dmappData', JSON.stringify(appData));
+}
+
+function getMonthName(num) {
+    const names = ['Dawnstar','Bloomtide','Starwake','Sunhigh','Embercrown','Harvestide','Leafall','Hallowtide','Shadowmoon','Icefall','Longnight','Frostveil'];
+    return names[num-1] || 'Unknown';
+}
+
+function saveCalendarState() {
+    appData.currentDate = currentDate;
+    appData.calendarNotes = calendarNotes;
+    localStorage.setItem('dmappData', JSON.stringify(appData));
+    alert('Calendar saved!');
+}
+
+// Load calendar on startup
+if (appData.currentDate) {
+    currentDate = appData.currentDate;
+    calendarNotes = appData.calendarNotes || {};
+    document.getElementById('calendarMonth').value = currentDate.month;
+    document.getElementById('calendarDay').value = currentDate.day;
+    displayCalendar();
+}
+
+
+
+
+// ===== START APP =====
+window.addEventListener('DOMContentLoaded', loadData);
+    </script>
+</body>
+</html>
