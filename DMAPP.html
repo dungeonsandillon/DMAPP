@@ -168,7 +168,7 @@ async function loadData() {
         const stored = localStorage.getItem('dmappData');
         if (stored) appData = JSON.parse(stored);
         else {
-            const res = await fetch('data.json');
+            const res = await fetch('data-v2.json');
             appData = await res.json();
             localStorage.setItem('dmappData', JSON.stringify(appData));
         }
@@ -188,7 +188,7 @@ async function loadData() {
             document.getElementById('calendarDay').value = currentDate.day;
             displayCalendar();  // ← THIS LINE FIXES IT
         }
-    } catch (e) { console.log('No data.json'); }
+    } catch (e) { console.log('No data-v2.json'); }
 }
 
 // ===== TAB: PREP =====
@@ -238,7 +238,7 @@ function generateWeather() {
     if (!appData.seasonalWeather) {
         document.getElementById('weatherResult').innerHTML = `
             <div style="padding:15px; text-align:center; color:#ffb370;">
-                data.json loading... (check console)
+                data-v2.json loading... (check console)
             </div>
         `;
         return;
@@ -351,3 +351,4 @@ window.addEventListener('DOMContentLoaded', loadData);
     </script>
 </body>
 </html>
+
